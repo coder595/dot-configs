@@ -7,7 +7,7 @@ server:
   base_url: search.mn7                # set custom base_url (or false)
   port: 8888
   bind_address: "127.0.0.1"      # address to listen on
-  secret_key: "c7afd4e249d4a54cbb48d57ce1f1754c16ba10f4b529700a6dcc03cb5928f1f6"  # change this!
+  secret_key: "[secret_key]"  # change this!
   limiter: true  # can be disabled for a private instance
   image_proxy: true
   method: "GET"
@@ -20,7 +20,7 @@ redis:
   url: redis://redis:6379/0
 general:
   debug: false
-  instance_name:  "MN7 SEARCH"
+  instance_name:  "SearX SEARCH"
   enable_metrics: true
 search:
   safe_search: 2
