@@ -28,9 +28,6 @@ alias rm='rm -i'
 alias brightness='sudo brillo -q -A 5'
 alias brightless='sudo brillo -q -U 5'
 
-alias bio-class='chromium --new-window https://us04web.zoom.us/j/7051443728?pwd=VjJFZjBWdFZMRVo1b3pxTEoxSnZsZz09'
-alias wapp='chromium https://web.whatsapp.com'
-
 # Install it from AUR shell-color-scripts OR (https://gitlab.com/dwt1/shell-color-scripts)
  colorscript random
  pfetch
