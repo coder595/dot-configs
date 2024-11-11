@@ -1,0 +1,8 @@
+## Path of the file  ~/.config/alacritty/alacritty.toml
+# Theme import
+general.import = ["/usr/lib/node_modules/alacritty-themes/themes/Alabaster.dark.toml"]
+## For different fonts (sudo pacman -S ttf-fira-code ttf-roboto-mono ttf-jetbrains-mono  ttf-hack)
+
+#[font]
+#normal = { family = "Fira Code", style = "Regular" }
+#size = 12.0
