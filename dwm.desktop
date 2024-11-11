@@ -1,0 +1,11 @@
+## Path of the file /usr/share/xsessions/dwm.desktop
+[Desktop Entry]
+Name=DWM
+Comment=Dynamic Window Manager
+#Exec=/usr/local/bin/dwm
+#TryExec=/usr/local/bin/dwm
+Exec=/usr/local/bin/startdwm.sh
+TryExec=/usr/local/bin/startdwm.sh
+Type=Application
+DesktopNames=dwm
+
