@@ -54,7 +54,11 @@ require("lazy").setup({
   {
     "morhetz/gruvbox",  -- Gruvbox color scheme plugin
     config = function()
-      vim.o.background = "dark"  -- Use the dark theme variant
+      vim.o.background = "dark"  -- Use the dark/light theme variant
+      vim.g.gruvbox_contrast_dark = "hard"  -- Options: "soft", "medium", "hard"
+      vim.g.gruvbox_transparent_bg = 1  -- Optional: Enable transparency
+      vim.g.gruvbox_bold = 1  -- Optional: Enable bold text
+      vim.g.gruvbox_italic = 1  -- Optional: Enable italic text
       vim.cmd("colorscheme gruvbox")  -- Set Gruvbox as the colorscheme
     end,
   },
@@ -132,28 +136,66 @@ require("lazy").setup({
   },
 
   -- Lualine for a customized status line that shows the current mode
-  {
-    "nvim-lualine/lualine.nvim",  -- Lightweight status line plugin
-    config = function()
-      require("lualine").setup({
-        options = {
-          theme = "gruvbox",         -- Use Gruvbox theme for status line
-          section_separators = "",   -- No separators for a cleaner look
-          component_separators = "", -- No separators for a cleaner look
-        },
-        sections = {
-          lualine_a = {"mode"},      -- Show current mode in section 'a'
-          lualine_b = {"branch"},    -- Git branch
-          lualine_c = {"filename"},  -- File name
-          lualine_x = {"encoding", "fileformat", "filetype"}, -- File details
-          lualine_y = {"progress"},  -- Progress in the file
-          lualine_z = {"location"},  -- Cursor position
-        },
-      })
-    end,
-  },
 
------Testing Plugins
+    {
+  "nvim-lualine/lualine.nvim", -- Lightweight status line plugin for Neovim
+  config = function()
+    require("lualine").setup({
+      options = {
+        -- Define the color scheme for Lualine (based on Gruvbox)
+        theme = {
+          normal = {
+            -- 'a' section for the active mode (e.g., NORMAL, INSERT)
+            a = { fg = "#282828", bg = "#d79921", gui = "bold" }, -- Gruvbox yellow
+            -- 'b' section for secondary info (e.g., Git branch)
+            b = { fg = "#ebdbb2", bg = "#504945" }, -- Gruvbox gray
+            -- 'c' section for file info
+            c = { fg = "#ebdbb2", bg = "#282828" }, -- Gruvbox dark background
+          },
+          -- Colors for INSERT mode
+          insert = {
+            a = { fg = "#282828", bg = "#b8bb26", gui = "bold" }, -- Gruvbox green
+          },
+          -- Colors for VISUAL mode
+          visual = {
+            a = { fg = "#282828", bg = "#d3869b", gui = "bold" }, -- Gruvbox purple
+          },
+          -- Colors for REPLACE mode
+          replace = {
+            a = { fg = "#282828", bg = "#fb4934", gui = "bold" }, -- Gruvbox red
+          },
+          -- Colors for COMMAND mode (updated here)
+          command = {
+            a = { fg = "#282828", bg = "#689d6a", gui = "bold" }, -- Gruvbox green
+          },
+          -- Colors for inactive windows (e.g., split windows that are not focused)
+          inactive = {
+            -- 'a' section for inactive mode
+            a = { fg = "#a89984", bg = "#282828" }, -- Gruvbox faded gray
+            -- 'b' section for secondary inactive info
+            b = { fg = "#a89984", bg = "#282828" }, -- Gruvbox faded gray
+            -- 'c' section for file info in inactive windows
+            c = { fg = "#a89984", bg = "#282828" }, -- Gruvbox faded gray
+          },
+        },
+        -- Remove separators between sections for a cleaner look
+        section_separators = "",
+        component_separators = "",
+      },
+
+      -- Define what each section of the status line should display
+      sections = {
+        lualine_a = { "mode" }, -- Display the current mode (NORMAL, INSERT, etc.)
+        lualine_b = { "branch" }, -- Show the current Git branch
+        lualine_c = { "filename" }, -- Display the name of the file
+        lualine_x = { "encoding", "fileformat", "filetype" }, -- File details (e.g., UTF-8, Unix, Lua)
+        lualine_y = { "progress" }, -- Show progress through the file (e.g., percentage)
+        lualine_z = { "location" }, -- Show the cursor's current position (line and column)
+      },
+    })
+  end,
+},
+
   -- barbar.nvim setup
   {
     "romgrk/barbar.nvim",
@@ -191,12 +233,29 @@ require("lazy").setup({
     end,
   },
 
+  ----Indent Lines Plugin
+    {
+  "Yggdroot/indentLine",
+  config = function()
+    -- Basic setup for indentLine
+    vim.g.indentLine_char = "│" -- Character used for indentation
+    vim.g.indentLine_color_term = 243 -- A terminal-friendly color
+    vim.g.indentLine_fileTypeExclude = { "help", "dashboard", "packer", "NvimTree" } -- Exclude specific filetypes
+
+    -- Set brighter color for indent lines
+    vim.api.nvim_set_hl(0, "IndentLine", { fg = "#fabd2f" }) -- Use bright gray (Gruvbox Light Gray)
+  end,
+},
+
 })
 
 ----Keybindings for moving between buffers
 vim.api.nvim_set_keymap("n", "<leader>l", ":BufferNext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>h", ":BufferPrevious<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", { noremap = true, silent = true })
+
+----Keybindings for tabs
+vim.api.nvim_set_keymap("n", "<leader>te", ":tabedit ", { noremap = true, silent = false }) -- Open file in new tab
 
 -- General Settings
 vim.o.number = true                -- Enable absolute line numbers
@@ -223,6 +282,7 @@ vim.o.cursorline = true            -- Highlight the current line
 vim.o.scrolloff = 8                -- Keep 8 lines above and below the cursor when scrolling
 vim.o.sidescrolloff = 8            -- Keep 8 columns to the left and right of the cursor
 vim.o.wrap = true                 -- Disable line wrapping
+vim.api.nvim_set_hl(0, "IndentLine", { fg = "#fabd2f" }) -- Bright yellow (Gruvbox-compatible)
 
 -- Finalize and reload settings
 vim.cmd([[autocmd BufWritePost init.lua source <afile> | PackerSync]])  -- Automatically reloads config on save
