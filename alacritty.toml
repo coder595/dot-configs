@@ -11,4 +11,8 @@ size = 11
   [font.normal]
   family = "FiraCode Nerd Font"
 # family = "JetBrains Mono"
+# family = "Fira Code"
+# family = "Roboto Mono"
+# family = "JetBrains Mono"
+# family = "Hack"
   style = "Regular"
