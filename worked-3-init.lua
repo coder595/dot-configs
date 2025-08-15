@@ -1,4 +1,3 @@
-------Added Dashboard and Telescope
 ---- Path of this init.lua: ~/.config/nvim/init.lua
 ---- lazy.nvim cache dir:  ~/.local/share/nvim/lazy/lazy.nvim
 
@@ -227,6 +226,21 @@ require("lazy").setup({
     end,
   },
 
+  -- File explorer: keep NERDTree (legacy) OR switch to nvim-tree --------------
+  -- Keep this block if you want to stay with NERDTree:
+  -- {
+  --   "preservim/nerdtree",
+  --   config = function()
+  --     vim.keymap.set("n", "<leader>n", ":NERDTreeToggle<CR>", { silent = true, desc = "NERDTree" })
+  --     vim.cmd([[
+  --       autocmd VimEnter * if !argc() | NERDTree | endif
+  --     ]])
+  --     vim.g.NERDTreeQuitOnOpen = 1
+  --     vim.cmd("highlight NERDTreeDir  ctermfg=108 guifg=#83a598")
+  --     vim.cmd("highlight NERDTreeFile ctermfg=251 guifg=#ebdbb2")
+  --   end,
+  -- },
+
   -- Recommended alternative (drop-in replacement): nvim-tree
   {
     "nvim-tree/nvim-tree.lua",
@@ -254,40 +268,46 @@ require("lazy").setup({
     end,
   },
 
+------Test--------
+
+
 -- Dashboard: alpha-nvim -------------------------------------------------------
-  {
+-----Icons according to Firacode icons-------
+
+{
   "goolord/alpha-nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
 
-    -- Header (ASCII art)
+    -- Header with NEOVIM in bold italic (ASCII)
     dashboard.section.header.val = {
-      " ███╗   ██╗██╗   ██╗███╗   ███╗",
-      " ████╗  ██║██║   ██║████╗ ████║",
-      " ██╔██╗ ██║██║   ██║██╔████╔██║",
-      " ██║╚██╗██║██║   ██║██║╚██╔╝██║",
-      " ██║ ╚████║╚██████╔╝██║ ╚═╝ ██║",
-      " ╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝",
-      "         Welcome to NeoVim      ",
+      "███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
+      "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
+      "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
+      "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
+      "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
+      "╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
+      "              𝐍𝐄𝐎𝐕𝐈𝐌  𝑩𝑶𝑳𝑫 𝑰𝑻𝑨𝑳𝑰𝑪          ",
     }
 
-    -- Buttons
+    -- Buttons with Nerd Font compatible icons
     dashboard.section.buttons.val = {
       dashboard.button("e", "  New File", ":ene <BAR> startinsert<CR>"),
-      dashboard.button("f", "  Find File", ":Telescope find_files<CR>"),
-      dashboard.button("r", "  Recent Files", ":Telescope oldfiles<CR>"),
-      dashboard.button("q", "  Quit", ":qa<CR>"),
+      dashboard.button("f", "󰈞  Find File", ":Telescope find_files<CR>"),
+      dashboard.button("r", "󰄉  Recent Files", ":Telescope oldfiles<CR>"),
+      dashboard.button("q", "󰅚  Quit", ":qa<CR>"),
     }
 
     -- Footer
-    dashboard.section.footer.val = "  Happy coding!"
+    dashboard.section.footer.val = "󱠇  Happy coding in NEOVIM!"
 
     dashboard.config.opts.noautocmd = true
     alpha.setup(dashboard.config)
   end,
 },
+
 
 -- Telescope -------------------------------------------------------------------
 {
@@ -321,6 +341,7 @@ require("lazy").setup({
 },
 
 
+----------------
 })
 
 
