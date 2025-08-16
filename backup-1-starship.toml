@@ -1,0 +1,45 @@
+# ~/.config/starship.toml
+
+# Prompt order
+format = """
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$git_metrics\
+$character
+"""
+
+# Directory (blue folder + name)
+[directory]
+style = "bold fg:#5e81ac"
+read_only = " "
+truncation_length = 1
+format = "📂 [$path]($style) "
+
+# Git branch
+[git_branch]
+symbol = " "
+style = "bold fg:#d08770"
+format = "on [$symbol$branch]($style) "
+
+# Git status
+[git_status]
+style = "fg:#ebcb8b"
+format = "([$all_status$ahead_behind]($style)) "
+
+# Git state (merging, rebasing, etc.)
+[git_state]
+style = "bold fg:#bf616a"
+format = "([$state( $progress_current/$progress_total)]($style)) "
+
+# Git metrics (staged/unstaged)
+[git_metrics]
+disabled = false
+format = "([+$added]($added_style))([-$deleted]($deleted_style)) "
+
+# Prompt character
+[character]
+success_symbol = "[❯](bold fg:#a3be8c)"
+error_symbol = "[❯](bold fg:#bf616a)"
+vicmd_symbol = "[❮](bold fg:#88c0d0)"
