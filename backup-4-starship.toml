@@ -1,0 +1,63 @@
+# ~/.config/starship.toml
+
+# Prompt order
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$git_metrics\
+$character
+"""
+
+# Username
+[username]
+style_user = "bold fg:#83a598"   # aqua
+style_root = "bold fg:#cc241d"   # red
+format = "[$user]($style)@"
+show_always = true
+
+# Hostname
+[hostname]
+ssh_only = false
+style = "bold fg:#d79921"        # yellow
+format = "[$hostname]($style) "
+
+# Directory (blue folder + name)
+[directory]
+style = "bold fg:#458588"        # blue
+read_only = " "
+truncation_length = 1
+format = "📂 [$path]($style) "
+
+# Git branch
+[git_branch]
+symbol = " "
+style = "bold fg:#d65d0e"        # orange
+format = "on [$symbol$branch]($style) "
+
+# Git status
+[git_status]
+style = "fg:#fabd2f"             # bright yellow
+format = "([$all_status$ahead_behind]($style)) "
+
+# Git state (merging, rebasing, etc.)
+[git_state]
+style = "bold fg:#cc241d"        # red
+format = "([$state( $progress_current/$progress_total)]($style)) "
+
+# Git metrics (staged/unstaged)
+[git_metrics]
+disabled = false
+added_style = "fg:#98971a"       # green
+deleted_style = "fg:#cc241d"     # red
+format = "([+$added]($added_style))([-$deleted]($deleted_style)) "
+
+# Prompt character
+[character]
+success_symbol = "[❯](bold fg:#98971a)"   # green
+error_symbol = "[❯](bold fg:#cc241d)"     # red
+vicmd_symbol = "[❮](bold fg:#83a598)"     # aqua
+

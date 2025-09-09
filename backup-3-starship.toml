@@ -1,0 +1,15 @@
+# Username
+[username]
+style_user = "bold fg:#88c0d0"   # Local user
+style_root = "bold fg:#bf616a"
+format = "[$user]($style)@"
+show_always = true
+
+# Hostname
+[hostname]
+ssh_only = false
+style = "bold fg:#ebcb8b"        # Local host
+ssh_symbol = "🌐 "               # Optional symbol for SSH
+ssh_style = "bold fg:#ffb86c"    # Different color when on SSH
+format = "[$ssh_symbol$hostname]($style) "
+
